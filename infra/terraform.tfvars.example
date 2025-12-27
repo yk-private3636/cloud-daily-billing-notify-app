@@ -1,0 +1,6 @@
+env             = ""
+project_name    = "cloud-daily-billing-notify-app"
+aws_region      = ["ap-northeast-1", "ap-northeast-3"]
+aws_az          = ["ap-northeast-1a", "ap-northeast-1c", "ap-northeast-1d"]
+assume_role_arn = ""
+assume_role_principal_name = ""
