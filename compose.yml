@@ -1,0 +1,22 @@
+services:
+
+  event:
+    container_name: event
+    image: cloud-daily-billing-notify-app-event:local-latest
+    build:
+      context: ./event
+      target: local
+    env_file:
+      - ./event/.env
+    volumes:
+    - ./event/src:/src
+
+  infra:
+    container_name: infra
+    image: cloud-daily-billing-notify-app-infra:local-latest
+    build:
+      context: ./infra
+    env_file:
+    - ./infra/.env
+    volumes:
+    - ./infra:/home/terraform/infra

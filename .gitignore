@@ -1,0 +1,4 @@
+.env
+/event/**/event.json
+*.tfvars
+/**/.terraform
