@@ -2,6 +2,13 @@ name: CI Workflow
 
 on:
     workflow_call:
+      inputs:
+        github_owner:
+          required: true
+          type: string
+        github_repo:
+          required: true
+          type: string
       secrets:
         GITHUB_PAT:
           required: true
@@ -16,6 +23,9 @@ jobs:
   
   check-terraform:
     uses: ./.github/workflows/check-terraform.yml
+    with:
+      github_owner: ${{ inputs.github_owner }}
+      github_repo: ${{ inputs.github_repo }}
     secrets:
       GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}

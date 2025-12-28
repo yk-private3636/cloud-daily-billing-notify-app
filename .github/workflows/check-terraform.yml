@@ -2,6 +2,13 @@ name: Check Terraform Workflow
 
 on:
   workflow_call:
+    inputs:
+      github_owner:
+        required: true
+        type: string
+      github_repo:
+        required: true
+        type: string
     secrets:
       GITHUB_PAT:
         required: true
@@ -58,6 +65,8 @@ jobs:
           account_id                            = "${{ secrets.AWS_ACCOUNT_ID }}"
           executor_role_arn                     = "${{ secrets.EXECUTOR_ROLE_ARN }}"
           executor_role_principal_name          = "${{ secrets.EXECUTOR_ROLE_PRINCIPAL_NAME }}"
+          github_owner                          = "${{ inputs.github_owner }}"
+          github_repo                           = "${{ inputs.github_repo }}"
           EOF
 
       - name: Terraform Init
