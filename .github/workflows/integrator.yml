@@ -9,7 +9,7 @@ jobs:
   integrator:
     uses: ./.github/workflows/ci.yml
     secrets:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       EXECUTOR_ROLE_ARN: ${{ secrets.EXECUTOR_ROLE_ARN }}
       EXECUTOR_ROLE_PRINCIPAL_NAME: ${{ secrets.EXECUTOR_ROLE_PRINCIPAL_NAME }}
