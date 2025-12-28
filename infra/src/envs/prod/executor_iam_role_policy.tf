@@ -22,6 +22,40 @@ module "executor_role_policy" {
       {
         Effect = "Allow"
         Action = [
+          "states:ValidateStateMachineDefinition",
+          "states:CreateStateMachine",
+          "states:UpdateStateMachine",
+          "states:DeleteStateMachine",
+          "states:DescribeStateMachine",
+          "states:ListStateMachineVersions",
+          "states:ListTagsForResource"
+        ]
+        Resource = [
+          module.sfn_state_machine.arn,
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "scheduler:CreateSchedule",
+          "scheduler:CreateScheduleGroup",
+          "scheduler:UpdateSchedule",
+          "scheduler:GetSchedule",
+          "scheduler:GetScheduleGroup",
+          "scheduler:DeleteSchedule",
+          "scheduler:DeleteScheduleGroup",
+          "scheduler:DescribeSchedule",
+          "scheduler:ListTagsForResource"
+        ]
+        Resource = [
+          "*"
+          # module.scheduler_schedule_group.arn,
+          # "${module.scheduler_schedule_group.arn}/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "iam:*",
         ]
         Resource = "*"
