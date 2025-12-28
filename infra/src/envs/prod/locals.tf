@@ -11,4 +11,6 @@ locals {
   scheduler_name                = "${local.name}-scheduler"
   scheduler_role_name           = "${local.name}-scheduler-role"
   scheduler_role_policy_name    = "${local.name}-scheduler-policy"
+
+  event_developer_user_name = "${local.name}-event-developer"
 }
