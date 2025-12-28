@@ -18,6 +18,8 @@ on:
         required: true
       EXECUTOR_ROLE_PRINCIPAL_NAME:
         required: true
+      TFSTATE_S3_BUCKET_ARN:
+        required: true
 
 jobs:
   check:
@@ -67,6 +69,7 @@ jobs:
           executor_role_principal_name          = "${{ secrets.EXECUTOR_ROLE_PRINCIPAL_NAME }}"
           github_owner                          = "${{ inputs.github_owner }}"
           github_repo                           = "${{ inputs.github_repo }}"
+          s3_tfstate_arn                       = "${{ secrets.TFSTATE_S3_BUCKET_ARN }}"
           EOF
 
       - name: Terraform Init

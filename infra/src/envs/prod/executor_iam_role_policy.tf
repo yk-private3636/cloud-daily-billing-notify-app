@@ -9,6 +9,19 @@ module "executor_role_policy" {
       {
         Effect = "Allow"
         Action = [
+          "s3:Get*",
+          "s3:List*",
+          "s3:PutObject",
+          "s3:DeleteObject"
+        ]
+        Resource = [
+          var.s3_tfstate_arn,
+          "${var.s3_tfstate_arn}/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "iam:*",
         ]
         Resource = "*"
