@@ -41,3 +41,15 @@ variable "executor_role_principal_name" {
   type      = string
   sensitive = true
 }
+
+variable "github_owner" {
+  type = string
+}
+
+variable "github_repo" {
+  type = string
+}
+
+variable "s3_tfstate_arn" {
+  type = string
+}
