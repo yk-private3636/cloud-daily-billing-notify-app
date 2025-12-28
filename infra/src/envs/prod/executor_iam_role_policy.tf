@@ -22,6 +22,21 @@ module "executor_role_policy" {
       {
         Effect = "Allow"
         Action = [
+          "states:ValidateStateMachineDefinition",
+          "states:CreateStateMachine",
+          "states:UpdateStateMachine",
+          "states:DeleteStateMachine",
+          "states:DescribeStateMachine",
+          "states:ListStateMachineVersions",
+          "states:ListTagsForResource"
+        ]
+        Resource = [
+          module.sfn_state_machine.arn,
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "iam:*",
         ]
         Resource = "*"
