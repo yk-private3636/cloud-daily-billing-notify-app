@@ -28,7 +28,8 @@ module "executor_role_policy" {
           "states:DeleteStateMachine",
           "states:DescribeStateMachine",
           "states:ListStateMachineVersions",
-          "states:ListTagsForResource"
+          "states:ListTagsForResource",
+          "states:TagResource"
         ]
         Resource = [
           module.sfn_state_machine.arn,
@@ -45,7 +46,8 @@ module "executor_role_policy" {
           "scheduler:DeleteSchedule",
           "scheduler:DeleteScheduleGroup",
           "scheduler:DescribeSchedule",
-          "scheduler:ListTagsForResource"
+          "scheduler:ListTagsForResource",
+          "scheduler:TagResource"
         ]
         Resource = [
           "*"
