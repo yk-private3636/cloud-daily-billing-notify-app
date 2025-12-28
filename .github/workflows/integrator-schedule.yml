@@ -1,0 +1,14 @@
+name: Scheduled Integrator
+
+on: 
+  schedule:
+    - cron: '0 15 * * *' # UTC
+
+jobs:
+  integrator:
+    uses: ./.github/workflows/ci.yml
+    secrets:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      EXECUTOR_ROLE_ARN: ${{ secrets.EXECUTOR_ROLE_ARN }}
+      EXECUTOR_ROLE_PRINCIPAL_NAME: ${{ secrets.EXECUTOR_ROLE_PRINCIPAL_NAME }}
