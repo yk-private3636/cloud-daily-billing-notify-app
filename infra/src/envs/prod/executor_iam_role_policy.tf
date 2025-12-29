@@ -45,14 +45,29 @@ module "executor_role_policy" {
           "scheduler:GetScheduleGroup",
           "scheduler:DeleteSchedule",
           "scheduler:DeleteScheduleGroup",
-          "scheduler:DescribeSchedule",
           "scheduler:ListTagsForResource",
           "scheduler:TagResource"
         ]
         Resource = [
-          "*"
-          # module.scheduler_schedule_group.arn,
-          # "${module.scheduler_schedule_group.arn}/*"
+          module.scheduler_schedule_group.arn,
+          module.scheduler_schedule.arn,
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:CreateTable",
+          "dynamodb:UpdateTable",
+          "dynamodb:DeleteTable",
+          "dynamodb:DescribeTable",
+          "dynamodb:TagResource",
+          "dynamodb:UntagResource",
+          "dynamodb:DescribeContinuousBackups",
+          "dynamodb:DescribeTimeToLive",
+          "dynamodb:ListTagsOfResource"
+        ]
+        Resource = [
+          module.dynamodb_processed_dates.arn,
         ]
       },
       {
