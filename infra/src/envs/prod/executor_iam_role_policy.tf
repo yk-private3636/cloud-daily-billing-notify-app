@@ -57,6 +57,23 @@ module "executor_role_policy" {
       {
         Effect = "Allow"
         Action = [
+          "dynamodb:CreateTable",
+          "dynamodb:UpdateTable",
+          "dynamodb:DeleteTable",
+          "dynamodb:DescribeTable",
+          "dynamodb:TagResource",
+          "dynamodb:UntagResource",
+          "dynamodb:DescribeContinuousBackups",
+          "dynamodb:DescribeTimeToLive",
+          "dynamodb:ListTagsOfResource"
+        ]
+        Resource = [
+          module.dynamodb_processed_dates.arn,
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "iam:*",
         ]
         Resource = "*"
