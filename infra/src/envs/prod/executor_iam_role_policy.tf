@@ -50,9 +50,8 @@ module "executor_role_policy" {
           "scheduler:TagResource"
         ]
         Resource = [
-          "*"
-          # module.scheduler_schedule_group.arn,
-          # "${module.scheduler_schedule_group.arn}/*"
+          module.scheduler_schedule_group.arn,
+          module.scheduler_schedule.arn,
         ]
       },
       {
