@@ -45,7 +45,6 @@ module "executor_role_policy" {
           "scheduler:GetScheduleGroup",
           "scheduler:DeleteSchedule",
           "scheduler:DeleteScheduleGroup",
-          "scheduler:DescribeSchedule",
           "scheduler:ListTagsForResource",
           "scheduler:TagResource"
         ]
