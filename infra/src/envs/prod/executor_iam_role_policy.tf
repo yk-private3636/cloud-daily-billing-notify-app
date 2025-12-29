@@ -73,6 +73,20 @@ module "executor_role_policy" {
       {
         Effect = "Allow"
         Action = [
+          "ecr:CreateRepository",
+          "ecr:DeleteRepository",
+          "ecr:DescribeRepositories",
+          "ecr:TagResource",
+          "ecr:UntagResource",
+          "ecr:ListTagsForResource"
+        ]
+        Resource = [
+          "*",
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "iam:*",
         ]
         Resource = "*"

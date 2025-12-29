@@ -19,4 +19,6 @@ locals {
 
   lambda_get_last_processed_date_role_name   = "${local.name}-get-last-processed-date-role"
   lambda_get_last_processed_date_policy_name = "${local.name}-get-last-processed-date-policy"
+
+  ecr_repository_name = "${local.name}-repository"
 }
