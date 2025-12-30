@@ -7,7 +7,7 @@ module "lambda_aws_cost_collector_func" {
   timeout       = 500
   memory_size   = 256
   architectures = ["x86_64"]
-  variables = [
+  environments = [
     {
       key = "APP_ENV"
       val = var.env

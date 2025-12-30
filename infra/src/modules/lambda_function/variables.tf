@@ -24,6 +24,6 @@ variable "timeout" {
     type    = number
 }
 
-variable "variables" {
+variable "environments" {
     type = list(map(string))
 }
