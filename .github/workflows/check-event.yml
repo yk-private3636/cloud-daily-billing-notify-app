@@ -31,7 +31,8 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          go-version: ${{ steps.docker-go-version.outputs.GO_VERSION }}
+          go-version: '${{ steps.docker-go-version.outputs.GO_VERSION }}'
+          cache: false
 
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.3
