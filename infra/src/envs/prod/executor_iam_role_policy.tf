@@ -29,10 +29,12 @@ module "executor_role_policy" {
           "states:DescribeStateMachine",
           "states:ListStateMachineVersions",
           "states:ListTagsForResource",
-          "states:TagResource"
+          "states:TagResource",
+          "states:UntagResource",
         ]
         Resource = [
-          module.sfn_state_machine.arn,
+          "*"
+          # module.sfn_state_machine.arn,
         ]
       },
       {
