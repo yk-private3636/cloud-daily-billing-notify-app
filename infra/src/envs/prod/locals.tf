@@ -6,6 +6,7 @@ locals {
 
   sfn_state_machine_name = "${local.name}-state-machine"
   sfn_role_name          = "${local.name}-sfn-role"
+  sfn_role_policy_name   = "${local.name}-sfn-role-policy"
 
   scheduler_schedule_group_name = "${local.name}-schedule-group"
   scheduler_name                = "${local.name}-scheduler"
