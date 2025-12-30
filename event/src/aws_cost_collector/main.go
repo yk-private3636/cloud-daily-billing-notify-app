@@ -64,6 +64,12 @@ func handler(ctx context.Context, event json.RawMessage) (Output, error) {
 		return Output{}, err
 	}
 
+	isValid := modules.IsDateDiffWithinDays(input.From, input.To, 31)
+
+	if !isValid {
+		return Output{}, fmt.Errorf("the difference between from and to must be within 31 days")
+	}
+
 	costs, err := collector.CollectDailyServiceCosts(ctx, input.From, input.To)
 
 	if err != nil {
