@@ -31,7 +31,8 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v6
         with:
-          go-version: ${{ steps.docker-go-version.outputs.GO_VERSION }}
+          go-version: '${{ steps.docker-go-version.outputs.GO_VERSION }}'
+          cache: false
 
       - name: Install Trivy
         uses: aquasecurity/setup-trivy@v0.2.3
@@ -54,6 +55,6 @@ jobs:
         run: |
           for target in $(ls -1 ./event/src | grep -n ^ | grep ${{ matrix.group }}: | awk -F : '{print $2}'); do
             git diff --name-only HEAD^..HEAD | grep -e ^event/Dockerfile -e ^event/src/${target} || continue
-            docker build -t cloud-daily-billing-notify-app:${target}-${{ github.sha }} --target prod --build-arg BUILD_TARGET=${target} --provenance=false ./event
-            trivy image --severity HIGH,CRITICAL --exit-code 1 cloud-daily-billing-notify-app:${target}-${{ github.sha }}
+            docker build -t cloud-daily-billing-notify-app:${target}-latest --target prod --build-arg BUILD_TARGET=${target} --provenance=false ./event
+            trivy image --severity HIGH,CRITICAL --exit-code 1 cloud-daily-billing-notify-app:${target}-latest
           done
