@@ -23,6 +23,9 @@ locals {
   lambda_get_last_processed_date_role_policy_name = "${local.name}-get-last-processed-date-role-policy"
   lambda_get_last_processed_date_function_name    = "${local.name}-get-last-processed-date-func"
   lambda_aws_cost_collector_policy_name           = "${local.name}-aws-cost-collector-policy"
+  lambda_aws_cost_collector_function_name         = "${local.name}-aws-cost-collector-func"
+  lambda_aws_cost_collector_role_name             = "${local.name}-aws-cost-collector-role"
+  lambda_aws_cost_collector_role_policy_name      = "${local.name}-aws-cost-collector-role-policy"
 
   ecr_repository_name = "${local.name}-repository"
 }
