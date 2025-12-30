@@ -22,8 +22,6 @@ module "executor_role_policy" {
       {
         Effect = "Allow"
         Action = [
-          "states:ValidateStateMachineDefinition",
-          "states:CreateStateMachine",
           "states:UpdateStateMachine",
           "states:DeleteStateMachine",
           "states:DescribeStateMachine",
@@ -33,9 +31,16 @@ module "executor_role_policy" {
           "states:UntagResource",
         ]
         Resource = [
-          "*"
-          # module.sfn_state_machine.arn,
+          module.sfn_state_machine.arn,
         ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "states:ValidateStateMachineDefinition",
+          "states:CreateStateMachine",
+        ]
+        Resource = "*"
       },
       {
         Effect = "Allow"
