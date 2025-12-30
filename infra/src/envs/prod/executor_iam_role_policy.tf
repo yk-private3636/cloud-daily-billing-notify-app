@@ -78,7 +78,28 @@ module "executor_role_policy" {
           "ecr:DescribeRepositories",
           "ecr:TagResource",
           "ecr:UntagResource",
-          "ecr:ListTagsForResource"
+          "ecr:ListTagsForResource",
+          "ecr:GetRepositoryPolicy",
+          "ecr:SetRepositoryPolicy",
+          "ecr:DeleteRepositoryPolicy",
+        ]
+        Resource = [
+          "*",
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "lambda:CreateFunction",
+          "lambda:UpdateFunctionCode",
+          "lambda:UpdateFunctionConfiguration",
+          "lambda:DeleteFunction",
+          "lambda:TagResource",
+          "lambda:UntagResource",
+          "lambda:ListTags",
+          "lambda:GetFunction",
+          "lambda:ListVersionsByFunction"
+
         ]
         Resource = [
           "*",

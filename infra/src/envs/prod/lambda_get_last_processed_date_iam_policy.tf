@@ -10,9 +10,6 @@ module "lambda_get_last_processed_date_policy" {
         Effect = "Allow"
         Action = [
           "dynamodb:GetItem",
-          "dynamodb:PutItem",
-          "dynamodb:UpdateItem",
-          "dynamodb:DeleteItem",
           "dynamodb:Query",
         ]
         Resource = [

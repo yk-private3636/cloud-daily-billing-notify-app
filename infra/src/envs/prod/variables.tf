@@ -53,3 +53,8 @@ variable "github_repo" {
 variable "s3_tfstate_arn" {
   type = string
 }
+
+variable "lambda_get_last_processed_date_image_tag" {
+  type    = string
+  default = "get_last_processed_date-latest"
+}
