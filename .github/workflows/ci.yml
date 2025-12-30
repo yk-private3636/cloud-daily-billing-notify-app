@@ -22,7 +22,11 @@ on:
           required: true
 
 jobs:
-  
+  check-event:
+    uses: ./.github/workflows/check-event.yml
+    secrets:
+      GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+
   check-terraform:
     uses: ./.github/workflows/check-terraform.yml
     with:

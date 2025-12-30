@@ -58,3 +58,8 @@ variable "lambda_get_last_processed_date_image_tag" {
   type    = string
   default = "get_last_processed_date-latest"
 }
+
+variable "lambda_aws_cost_collector_image_tag" {
+  type    = string
+  default = "aws_cost_collector-latest"
+}

@@ -9,7 +9,7 @@ resource "aws_lambda_function" "main" {
 
     environment {
       variables = {
-        for variable in var.variables : variable.key => variable.val
+        for environment in var.environments : environment.key => environment.val
       }
     }
 }

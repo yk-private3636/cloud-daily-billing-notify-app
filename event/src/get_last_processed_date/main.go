@@ -53,7 +53,7 @@ func main() {
 	if strings.ToLower(os.Getenv("APP_ENV")) == "prod" {
 		lambda.Start(handler)
 	} else {
-		event := modules.FileContent("./event.json")
+		event, _ := os.ReadFile("./event.json")
 		fmt.Println(handler(context.Background(), event))
 	}
 }

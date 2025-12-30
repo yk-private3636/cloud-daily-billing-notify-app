@@ -7,7 +7,7 @@ module "lambda_get_last_processed_date_func" {
   timeout       = 180
   memory_size   = 256
   architectures = ["x86_64"]
-  variables = [
+  environments = [
     {
       key = "APP_ENV"
       val = var.env
