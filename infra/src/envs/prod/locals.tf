@@ -17,6 +17,10 @@ locals {
 
   dynamodb_table_name = "${local.name}-processed-dates"
 
-  lambda_get_last_processed_date_role_name   = "${local.name}-get-last-processed-date-role"
-  lambda_get_last_processed_date_policy_name = "${local.name}-get-last-processed-date-policy"
+  lambda_get_last_processed_date_role_name        = "${local.name}-get-last-processed-date-role"
+  lambda_get_last_processed_date_policy_name      = "${local.name}-get-last-processed-date-policy"
+  lambda_get_last_processed_date_role_policy_name = "${local.name}-get-last-processed-date-role-policy"
+  lambda_get_last_processed_date_function_name    = "${local.name}-get-last-processed-date-func"
+
+  ecr_repository_name = "${local.name}-repository"
 }
