@@ -70,6 +70,14 @@ func handler(ctx context.Context, event json.RawMessage) (Output, error) {
 		return Output{}, fmt.Errorf("the difference between from and to must be within 31 days")
 	}
 
+	if input.From == input.To {
+		newTo, err := modules.AddDateString(input.To, 1)
+		if err != nil {
+			return Output{}, err
+		}
+		input.To = newTo
+	}
+
 	costs, err := collector.CollectDailyServiceCosts(ctx, input.From, input.To)
 
 	if err != nil {
