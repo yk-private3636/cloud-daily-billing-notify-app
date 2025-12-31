@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_PAT }}
-          fetch-depth: 0
+          fetch-depth: 1
           sparse-checkout: 'event/'
 
       - name: Set Go version from Dockerfile
@@ -54,7 +54,6 @@ jobs:
       - name: Security scan changed event targets
         run: |
           for target in $(ls -1 ./event/src | grep -n ^ | grep ${{ matrix.group }}: | awk -F : '{print $2}'); do
-            git diff --name-only HEAD^..HEAD | grep -e ^event/Dockerfile -e ^event/src/${target} || continue
             docker build -t cloud-daily-billing-notify-app:${target}-latest --target prod --build-arg BUILD_TARGET=${target} --provenance=false ./event
             trivy image --severity HIGH,CRITICAL --exit-code 1 cloud-daily-billing-notify-app:${target}-latest
           done
