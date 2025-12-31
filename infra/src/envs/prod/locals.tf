@@ -31,4 +31,5 @@ locals {
   ecr_repository_name = "${local.name}-repository"
 
   ssm_parameter_line_priv_jwk_name = "/${var.project_name}/line/priv_jwk"
+  ssm_parameter_line_user_id_name  = "/${var.project_name}/line/user_id"
 }
