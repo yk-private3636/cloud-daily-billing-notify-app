@@ -26,6 +26,7 @@ locals {
   lambda_aws_cost_collector_function_name         = "${local.name}-aws-cost-collector-func"
   lambda_aws_cost_collector_role_name             = "${local.name}-aws-cost-collector-role"
   lambda_aws_cost_collector_role_policy_name      = "${local.name}-aws-cost-collector-role-policy"
+  lambda_cost_line_notify_policy_name             = "${local.name}-cost-line-notify-policy"
 
   ecr_repository_name = "${local.name}-repository"
 
