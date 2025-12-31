@@ -28,4 +28,6 @@ locals {
   lambda_aws_cost_collector_role_policy_name      = "${local.name}-aws-cost-collector-role-policy"
 
   ecr_repository_name = "${local.name}-repository"
+
+  ssm_parameter_line_priv_jwk_name = "/${var.project_name}/line/priv_jwk"
 }
