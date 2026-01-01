@@ -13,8 +13,8 @@ module "lambda_cost_line_notify_policy" {
           "ssm:GetParameter",
         ]
         Resource = [
-          "arn:aws:ssm:${var.aws_region[0]}:${var.account_id}:parameter${local.ssm_parameter_line_priv_jwk_name}",
-          "arn:aws:ssm:${var.aws_region[0]}:${var.account_id}:parameter${local.ssm_parameter_line_user_id_name}",
+          aws_ssm_parameter.line_priv_jwk.arn,
+          aws_ssm_parameter.line_user_id.arn,
         ]
       },
       {

@@ -63,3 +63,18 @@ variable "lambda_aws_cost_collector_image_tag" {
   type    = string
   default = "aws_cost_collector-latest"
 }
+
+variable "lambda_cost_line_notify_image_tag" {
+  type    = string
+  default = "cost_line_notify-latest"
+}
+
+variable "line_kid" {
+  type      = string
+  sensitive = true
+}
+
+variable "line_channel_id" {
+  type      = string
+  sensitive = true
+}
