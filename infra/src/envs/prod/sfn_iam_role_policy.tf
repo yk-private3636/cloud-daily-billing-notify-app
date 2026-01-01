@@ -13,6 +13,8 @@ module "sfn_role_policy" {
         ]
         Resource = [
           module.lambda_get_next_processing_date_func.arn,
+          module.lambda_aws_cost_collector_func.arn,
+          module.lambda_cost_line_notify_func.arn
         ]
       }
     ]

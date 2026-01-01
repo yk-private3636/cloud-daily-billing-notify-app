@@ -14,13 +14,24 @@ module "sfn_state_machine" {
         End  = true
         Branches = [
           {
-            StartAt = "AWSGetLastProcessedDate"
+            StartAt = "AWSBillingNotification"
             States = {
-              AWSGetLastProcessedDate = {
+              AWSBillingNotification = {
+                Type = "Pass"
+                Assign = {
+                  "cost_source" = "AWS"
+                }
+                Next = "AWSGetNextProcessingDate"
+              },
+              AWSGetNextProcessingDate = {
                 Type     = "Task"
                 Resource = module.lambda_get_next_processing_date_func.arn
                 Arguments = {
-                  "cost_source" = "aws"
+                  "cost_source" = "{% $cost_source %}"
+                }
+                Output = {
+                  from = "{% $states.result.next_processing_date %}"
+                  to   = "{% $fromMillis($millis(), '[Y0001]-[M01]-[D01]', '+0900') %}"
                 }
                 Retry = [
                   {
@@ -29,16 +40,44 @@ module "sfn_state_machine" {
                     MaxAttempts     = 3
                   }
                 ]
+                Next = "AWSCostCollector"
+              },
+              AWSCostCollector = {
+                Type     = "Task"
+                Resource = module.lambda_aws_cost_collector_func.arn
+                Arguments = {
+                  from = "{% $states.input.from %}"
+                  to   = "{% $states.input.to %}"
+                }
+                Output = {
+                  costs = "{% $states.result.costs %}"
+                }
+                Retry = [
+                  {
+                    ErrorEquals     = ["States.ALL"]
+                    IntervalSeconds = 3
+                    MaxAttempts     = 3
+                  }
+                ]
+                Next = "AWSCostLineNotify"
+              }
+              AWSCostLineNotify = {
+                Type     = "Task"
+                Resource = module.lambda_cost_line_notify_func.arn
+                Arguments = {
+                  cost_source = "{% $cost_source %}"
+                  costs       = "{% $states.input.costs %}"
+                }
                 End = true
               }
             }
           },
           # {
-          #   StartAt = "RakutenCardGetLastProcessedDate"
+          #   StartAt = "RakutenCardGetNextProcessingDate"
           #   States = {
-          #     RakutenCardGetLastProcessedDate = {
+          #     RakutenCardGetNextProcessingDate = {
           #       Type     = "Task"
-          #       Resource = module.lambda_get_last_processed_date_func.arn
+          #       Resource = module.lambda_get_next_processing_date_func.arn
           #       Arguments = {
           #         "cost_source" = "rakuten_card"
           #       }

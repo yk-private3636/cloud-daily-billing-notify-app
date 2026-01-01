@@ -3,7 +3,7 @@ module "scheduler_schedule" {
 
   name                         = local.scheduler_name
   group_name                   = module.scheduler_schedule_group.name
-  schedule_expression          = "cron(0 22 * * ? *)"
+  schedule_expression          = "cron(0 8 * * ? *)"
   schedule_expression_timezone = "Asia/Tokyo"
 
   target = {
