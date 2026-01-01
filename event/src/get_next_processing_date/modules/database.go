@@ -14,7 +14,7 @@ type database struct {
 }
 
 type Database interface {
-	GetNextProcessingDate(ctx context.Context, partitionKey, partitionValue string) (string, error)
+	GetNextProcessingDate(ctx context.Context, partitionValue string) (string, error)
 }
 
 func NewDatabase(
@@ -27,14 +27,14 @@ func NewDatabase(
 	}
 }
 
-func (db *database) GetNextProcessingDate(ctx context.Context, partitionKey, partitionValue string) (string, error) {
+func (db *database) GetNextProcessingDate(ctx context.Context, costSource string) (string, error) {
 	res, err := db.client.Query(ctx, &dynamodb.QueryInput{
 		TableName: aws.String(db.tableName),
 		ExpressionAttributeNames: map[string]string{
-			"#pk": partitionKey,
+			"#pk": "cost_source",
 		},
 		ExpressionAttributeValues: map[string]types.AttributeValue{
-			":pv": &types.AttributeValueMemberS{Value: partitionValue},
+			":pv": &types.AttributeValueMemberS{Value: costSource},
 		},
 		KeyConditionExpression: aws.String("#pk = :pv"),
 		Limit:                  aws.Int32(1),

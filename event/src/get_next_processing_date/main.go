@@ -67,7 +67,7 @@ func handler(ctx context.Context, event json.RawMessage) (Output, error) {
 		return Output{}, err
 	}
 
-	nextProcessingDate, err := database.GetNextProcessingDate(ctx, "cost_source", input.CostSource)
+	nextProcessingDate, err := database.GetNextProcessingDate(ctx, input.CostSource)
 
 	if err != nil {
 		return Output{}, err
