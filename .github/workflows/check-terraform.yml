@@ -18,6 +18,10 @@ on:
         required: true
       EXECUTOR_ROLE_PRINCIPAL_NAME:
         required: true
+      LINE_KID:
+        required: true
+      LINE_CHANNEL_ID:
+        required: true
       TFSTATE_S3_BUCKET_ARN:
         required: true
 
@@ -70,6 +74,8 @@ jobs:
           github_owner                          = "${{ inputs.github_owner }}"
           github_repo                           = "${{ inputs.github_repo }}"
           s3_tfstate_arn                       = "${{ secrets.TFSTATE_S3_BUCKET_ARN }}"
+          line_kid                             = "${{ secrets.LINE_KID }}"
+          line_channel_id                     = "${{ secrets.LINE_CHANNEL_ID }}"
           EOF
 
       - name: Terraform Init

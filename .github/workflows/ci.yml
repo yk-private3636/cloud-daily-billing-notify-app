@@ -18,6 +18,10 @@ on:
           required: true
         EXECUTOR_ROLE_PRINCIPAL_NAME:
           required: true
+        LINE_KID:
+          required: true
+        LINE_CHANNEL_ID:
+          required: true
         TFSTATE_S3_BUCKET_ARN:
           required: true
 
@@ -37,4 +41,6 @@ jobs:
       AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
       EXECUTOR_ROLE_ARN: ${{ secrets.EXECUTOR_ROLE_ARN }}
       EXECUTOR_ROLE_PRINCIPAL_NAME: ${{ secrets.EXECUTOR_ROLE_PRINCIPAL_NAME }}
+      LINE_KID: ${{ secrets.LINE_KID }}
+      LINE_CHANNEL_ID: ${{ secrets.LINE_CHANNEL_ID }}
       TFSTATE_S3_BUCKET_ARN: ${{ secrets.TFSTATE_S3_BUCKET_ARN }}
