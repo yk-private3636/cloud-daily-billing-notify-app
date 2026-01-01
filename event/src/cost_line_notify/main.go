@@ -12,6 +12,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/ssm"
 	"github.com/yk-private3636/cloud-daily-billing-notify-app/event/src/cost_line_notify/modules"
 )
@@ -20,6 +21,7 @@ var (
 	store      modules.Store
 	rsaBuilder modules.Builder
 	notify     modules.Notify
+	database   modules.Database
 )
 
 type Input struct {
@@ -65,6 +67,11 @@ func init() {
 		},
 		os.Getenv("LINE_API_BASE_URI"),
 	)
+
+	database = modules.NewDatabase(
+		dynamodb.NewFromConfig(cfg),
+		os.Getenv("TABLE_NAME"),
+	)
 }
 
 func main() {
@@ -90,8 +97,6 @@ func handler(ctx context.Context, event json.RawMessage) error {
 		return nil
 	}
 
-	// TODO: 排他制御開始(DynamoDB)
-
 	toUserID, err := store.GetParameter(ctx, os.Getenv("SSM_LINE_USER_ID_NAME"))
 
 	if err != nil {
@@ -110,7 +115,7 @@ func handler(ctx context.Context, event json.RawMessage) error {
 		return err
 	}
 
-	_, err = notify.BuildCostNotifyMessage(
+	notifyDate, err := notify.BuildCostNotifyMessage(
 		signed,
 		toUserID,
 		input.CostSource,
@@ -118,10 +123,37 @@ func handler(ctx context.Context, event json.RawMessage) error {
 	)
 
 	if err != nil {
+
+		date, err := time.Parse(time.DateOnly, notifyDate)
+
+		if err != nil {
+			return err
+		}
+
+		nextDate := date.Format(time.DateOnly)
+
+		err = database.PutItem(ctx, input.CostSource, nextDate)
+
+		if err != nil {
+			return err
+		}
+
 		return err
 	}
 
-	// TODO: 排他制御終了(DynamoDB)
+	date, err := time.Parse(time.DateOnly, notifyDate)
+
+	if err != nil {
+		return err
+	}
+
+	nextDate := date.Add(24 * time.Hour).Format(time.DateOnly)
+
+	err = database.PutItem(ctx, input.CostSource, nextDate)
+
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
