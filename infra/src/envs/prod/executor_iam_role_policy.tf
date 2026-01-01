@@ -91,6 +91,7 @@ module "executor_role_policy" {
         Effect = "Allow"
         Action = [
           "ecr:GetRepositoryPolicy",
+          "ecr:PutImageTagMutability",
           "ecr:DeleteRepository",
           "ecr:UntagResource",
           "ecr:DeleteRepositoryPolicy",
