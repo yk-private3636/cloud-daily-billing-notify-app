@@ -23,8 +23,8 @@ var (
 )
 
 type Input struct {
-	Platform string                        `json:"platform"`
-	Costs    map[string]map[string]float64 `json:"costs"`
+	CostSource string                        `json:"cost_source"`
+	Costs      map[string]map[string]float64 `json:"costs"`
 }
 
 func init() {
@@ -113,7 +113,7 @@ func handler(ctx context.Context, event json.RawMessage) error {
 	_, err = notify.BuildCostNotifyMessage(
 		signed,
 		toUserID,
-		input.Platform,
+		input.CostSource,
 		input.Costs,
 	)
 

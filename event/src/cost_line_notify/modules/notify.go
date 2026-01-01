@@ -16,7 +16,7 @@ type lineNotify struct {
 }
 
 type Notify interface {
-	BuildCostNotifyMessage(jwt, toID, platform string, costs map[string]map[string]float64) (string, error)
+	BuildCostNotifyMessage(jwt, toID, costSource string, costs map[string]map[string]float64) (string, error)
 }
 
 type lineNotifyReqBody struct {
@@ -43,7 +43,7 @@ func NewLineNotify(
 	}
 }
 
-func (hlc *lineNotify) BuildCostNotifyMessage(jwt, toID, platform string, costs map[string]map[string]float64) (string, error) {
+func (hlc *lineNotify) BuildCostNotifyMessage(jwt, toID, costSource string, costs map[string]map[string]float64) (string, error) {
 
 	var processedDate string
 
@@ -62,7 +62,7 @@ func (hlc *lineNotify) BuildCostNotifyMessage(jwt, toID, platform string, costs 
 	for _, date := range dailyCostKeysAsc {
 		var messageText strings.Builder
 		body.Messages = nil
-		messageText.WriteString(fmt.Sprintf("%s（%s）のコスト情報です。\n", platform, date))
+		messageText.WriteString(fmt.Sprintf("%s（%s）のコスト情報です。\n", costSource, date))
 		body.Messages = append(body.Messages, message{
 			Type: "text",
 			Text: func() string {
