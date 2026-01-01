@@ -23,7 +23,7 @@ type Input struct {
 }
 
 type Output struct {
-	LastProcessedDate string `json:"last_processed_date"`
+	NextProcessingDate string `json:"next_processing_date"`
 }
 
 func init() {
@@ -67,13 +67,13 @@ func handler(ctx context.Context, event json.RawMessage) (Output, error) {
 		return Output{}, err
 	}
 
-	lastProcessedDate, err := database.GetLastProcessedDate(ctx, "cost_source", input.CostSource)
+	nextProcessingDate, err := database.GetNextProcessingDate(ctx, "cost_source", input.CostSource)
 
 	if err != nil {
 		return Output{}, err
 	}
 
 	return Output{
-		LastProcessedDate: lastProcessedDate,
+		NextProcessingDate: nextProcessingDate,
 	}, nil
 }

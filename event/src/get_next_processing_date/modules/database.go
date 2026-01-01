@@ -14,7 +14,7 @@ type database struct {
 }
 
 type Database interface {
-	GetLastProcessedDate(ctx context.Context, partitionKey, partitionValue string) (string, error)
+	GetNextProcessingDate(ctx context.Context, partitionKey, partitionValue string) (string, error)
 }
 
 func NewDatabase(
@@ -27,7 +27,7 @@ func NewDatabase(
 	}
 }
 
-func (db *database) GetLastProcessedDate(ctx context.Context, partitionKey, partitionValue string) (string, error) {
+func (db *database) GetNextProcessingDate(ctx context.Context, partitionKey, partitionValue string) (string, error) {
 	res, err := db.client.Query(ctx, &dynamodb.QueryInput{
 		TableName: aws.String(db.tableName),
 		ExpressionAttributeNames: map[string]string{
@@ -45,7 +45,7 @@ func (db *database) GetLastProcessedDate(ctx context.Context, partitionKey, part
 	}
 
 	for _, item := range res.Items {
-		if v, ok := item["processed_date"]; ok {
+		if v, ok := item["next_processing_date"]; ok {
 			return v.(*types.AttributeValueMemberS).Value, nil
 		}
 	}
