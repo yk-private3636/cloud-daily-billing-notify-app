@@ -44,6 +44,11 @@ jobs:
           aws-region: ap-northeast-1
           role-to-assume: ${{ secrets.EXECUTOR_ROLE_ARN }}
       
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.3
+        with:
+          version: v0.61.0
+      
       - name: Set Terraform version from Dockerfile
         id: docker-terraform-version
         working-directory: infra
@@ -88,4 +93,8 @@ jobs:
 
       - name: Terraform Plan
         working-directory: infra/src/envs/prod
-        run: terraform plan -no-color -input=false
+        run: terraform plan --out /tmp/tfplan -no-color
+
+      - name: Trivy Infrastructure as Code Scan
+        working-directory: infra/src/envs/prod
+        run: trivy config --severity HIGH,CRITICAL --exit-code 1 /tmp/tfplan
