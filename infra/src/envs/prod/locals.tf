@@ -16,17 +16,17 @@ locals {
   event_developer_user_name = "${local.name}-event-developer"
   event_developer_role_name = "${local.name}-event-developer-role"
 
-  dynamodb_table_name = "${local.name}-processed-dates"
+  dynamodb_table_name = "${local.name}-next-processing-dates"
 
-  lambda_get_last_processed_date_role_name        = "${local.name}-get-last-processed-date-role"
-  lambda_get_last_processed_date_policy_name      = "${local.name}-get-last-processed-date-policy"
-  lambda_get_last_processed_date_role_policy_name = "${local.name}-get-last-processed-date-role-policy"
-  lambda_get_last_processed_date_function_name    = "${local.name}-get-last-processed-date-func"
-  lambda_aws_cost_collector_policy_name           = "${local.name}-aws-cost-collector-policy"
-  lambda_aws_cost_collector_function_name         = "${local.name}-aws-cost-collector-func"
-  lambda_aws_cost_collector_role_name             = "${local.name}-aws-cost-collector-role"
-  lambda_aws_cost_collector_role_policy_name      = "${local.name}-aws-cost-collector-role-policy"
-  lambda_cost_line_notify_policy_name             = "${local.name}-cost-line-notify-policy"
+  lambda_get_next_processing_date_role_name        = "${local.name}-get-next-date-role"
+  lambda_get_next_processing_date_policy_name      = "${local.name}-get-next-date-policy"
+  lambda_get_next_processing_date_role_policy_name = "${local.name}-get-next-date-role-policy"
+  lambda_get_next_processing_date_function_name    = "${local.name}-get-next-date-func"
+  lambda_aws_cost_collector_policy_name            = "${local.name}-aws-cost-collector-policy"
+  lambda_aws_cost_collector_function_name          = "${local.name}-aws-cost-collector-func"
+  lambda_aws_cost_collector_role_name              = "${local.name}-aws-cost-collector-role"
+  lambda_aws_cost_collector_role_policy_name       = "${local.name}-aws-cost-collector-role-policy"
+  lambda_cost_line_notify_policy_name              = "${local.name}-cost-line-notify-policy"
 
   ecr_repository_name = "${local.name}-repository"
 

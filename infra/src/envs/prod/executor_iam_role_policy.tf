@@ -74,7 +74,7 @@ module "executor_role_policy" {
           "dynamodb:ListTagsOfResource"
         ]
         Resource = [
-          module.dynamodb_processed_dates.arn,
+          module.dynamodb_next_processing_dates_table.arn,
         ]
       },
       {

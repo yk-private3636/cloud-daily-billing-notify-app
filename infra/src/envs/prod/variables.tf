@@ -54,9 +54,9 @@ variable "s3_tfstate_arn" {
   type = string
 }
 
-variable "lambda_get_last_processed_date_image_tag" {
+variable "lambda_get_next_processing_date_image_tag" {
   type    = string
-  default = "get_last_processed_date-latest"
+  default = "get_next_processing_date-latest"
 }
 
 variable "lambda_aws_cost_collector_image_tag" {

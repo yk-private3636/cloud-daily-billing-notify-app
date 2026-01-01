@@ -1,18 +1,18 @@
-module "dynamodb_processed_dates" {
+module "dynamodb_next_processing_dates_table" {
   source = "../../modules/dynamodb_table"
 
   table_name   = local.dynamodb_table_name
   billing_mode = "PAY_PER_REQUEST"
 
   hash_key  = "cost_source"
-  range_key = "processed_date"
+  range_key = "next_processing_date"
   attributes = [
     {
       name = "cost_source"
       type = "S"
     },
     {
-      name = "processed_date"
+      name = "next_processing_date"
       type = "S"
     },
   ]

@@ -18,7 +18,7 @@ module "sfn_state_machine" {
             States = {
               AWSGetLastProcessedDate = {
                 Type     = "Task"
-                Resource = module.lambda_get_last_processed_date_func.arn
+                Resource = module.lambda_get_next_processing_date_func.arn
                 Arguments = {
                   "cost_source" = "aws"
                 }

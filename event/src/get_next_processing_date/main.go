@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/yk-private3636/cloud-daily-billing-notify-app/event/src/get_last_processed_date/modules"
+	"github.com/yk-private3636/cloud-daily-billing-notify-app/event/src/get_next_processing_date/modules"
 )
 
 var (
