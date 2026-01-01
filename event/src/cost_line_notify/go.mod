@@ -1,11 +1,16 @@
-module github.com/yk-private3636/cloud-daily-billing-notify-app/event/src/get_last_processed_date
+module github.com/yk-private3636/cloud-daily-billing-notify-app/event/src/cost_line_notify
 
 go 1.25.5
 
 require (
-	github.com/aws/aws-lambda-go v1.51.1 // indirect
-	github.com/aws/aws-sdk-go-v2 v1.41.0 // indirect
-	github.com/aws/aws-sdk-go-v2/config v1.32.6 // indirect
+	github.com/aws/aws-lambda-go v1.51.1
+	github.com/aws/aws-sdk-go-v2 v1.41.0
+	github.com/aws/aws-sdk-go-v2/config v1.32.6
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.67.7
+	github.com/lestrrat-go/jwx/v3 v3.0.12
+)
+
+require (
 	github.com/aws/aws-sdk-go-v2/credentials v1.19.6 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.16 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.16 // indirect
@@ -20,4 +25,17 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.12 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.41.5 // indirect
 	github.com/aws/smithy-go v1.24.0 // indirect
+	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0 // indirect
+	github.com/goccy/go-json v0.10.3 // indirect
+	github.com/lestrrat-go/blackmagic v1.0.4 // indirect
+	github.com/lestrrat-go/dsig v1.0.0 // indirect
+	github.com/lestrrat-go/dsig-secp256k1 v1.0.0 // indirect
+	github.com/lestrrat-go/httpcc v1.0.1 // indirect
+	github.com/lestrrat-go/httprc/v3 v3.0.1 // indirect
+	github.com/lestrrat-go/option v1.0.1 // indirect
+	github.com/lestrrat-go/option/v2 v2.0.0 // indirect
+	github.com/segmentio/asm v1.2.1 // indirect
+	github.com/valyala/fastjson v1.6.4 // indirect
+	golang.org/x/crypto v0.43.0 // indirect
+	golang.org/x/sys v0.37.0 // indirect
 )

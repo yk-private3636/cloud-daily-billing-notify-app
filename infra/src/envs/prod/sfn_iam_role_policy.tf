@@ -12,7 +12,7 @@ module "sfn_role_policy" {
           "lambda:InvokeFunction"
         ]
         Resource = [
-          module.lambda_get_last_processed_date_func.arn,
+          module.lambda_get_next_processing_date_func.arn,
         ]
       }
     ]

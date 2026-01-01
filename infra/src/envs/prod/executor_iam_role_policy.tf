@@ -74,7 +74,7 @@ module "executor_role_policy" {
           "dynamodb:ListTagsOfResource"
         ]
         Resource = [
-          module.dynamodb_processed_dates.arn,
+          module.dynamodb_next_processing_dates_table.arn,
         ]
       },
       {
@@ -111,6 +111,29 @@ module "executor_role_policy" {
         Resource = [
           "*",
         ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:PutParameter",
+          "ssm:GetParameter",
+          "ssm:GetParameterHistory",
+          "ssm:DeleteParameter",
+          "ssm:AddTagsToResource",
+          "ssm:RemoveTagsFromResource",
+          "ssm:ListTagsForResource"
+        ]
+        Resource = [
+          "arn:aws:ssm:${var.aws_region[0]}:${var.account_id}:parameter/cloud-daily-billing-notify-app/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameters",
+          "ssm:DescribeParameters",
+        ]
+        Resource = "*"
       },
       {
         Effect = "Allow"

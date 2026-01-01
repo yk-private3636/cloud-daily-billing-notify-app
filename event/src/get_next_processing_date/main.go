@@ -11,7 +11,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
-	"github.com/yk-private3636/cloud-daily-billing-notify-app/event/src/get_last_processed_date/modules"
+	"github.com/yk-private3636/cloud-daily-billing-notify-app/event/src/get_next_processing_date/modules"
 )
 
 var (
@@ -23,7 +23,7 @@ type Input struct {
 }
 
 type Output struct {
-	LastProcessedDate string `json:"last_processed_date"`
+	NextProcessingDate string `json:"next_processing_date"`
 }
 
 func init() {
@@ -67,13 +67,13 @@ func handler(ctx context.Context, event json.RawMessage) (Output, error) {
 		return Output{}, err
 	}
 
-	lastProcessedDate, err := database.GetLastProcessedDate(ctx, "cost_source", input.CostSource)
+	nextProcessingDate, err := database.GetNextProcessingDate(ctx, input.CostSource)
 
 	if err != nil {
 		return Output{}, err
 	}
 
 	return Output{
-		LastProcessedDate: lastProcessedDate,
+		NextProcessingDate: nextProcessingDate,
 	}, nil
 }
