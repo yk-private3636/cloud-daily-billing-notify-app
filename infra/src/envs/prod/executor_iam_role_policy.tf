@@ -81,14 +81,7 @@ module "executor_role_policy" {
         Effect = "Allow"
         Action = [
           "ecr:CreateRepository",
-          "ecr:DeleteRepository",
-          "ecr:DescribeRepositories",
-          "ecr:TagResource",
-          "ecr:UntagResource",
           "ecr:ListTagsForResource",
-          "ecr:GetRepositoryPolicy",
-          "ecr:SetRepositoryPolicy",
-          "ecr:DeleteRepositoryPolicy",
         ]
         Resource = [
           "*",
@@ -97,19 +90,44 @@ module "executor_role_policy" {
       {
         Effect = "Allow"
         Action = [
+          "ecr:GetRepositoryPolicy",
+          "ecr:DeleteRepository",
+          "ecr:UntagResource",
+          "ecr:DeleteRepositoryPolicy",
+          "ecr:SetRepositoryPolicy",
+          "ecr:DescribeRepositories",
+          "ecr:TagResource",
+        ]
+        Resource = [
+          module.ecr_repository.arn,
+          "${module.ecr_repository.arn}/*",
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
           "lambda:CreateFunction",
-          "lambda:UpdateFunctionCode",
-          "lambda:UpdateFunctionConfiguration",
-          "lambda:DeleteFunction",
-          "lambda:TagResource",
-          "lambda:UntagResource",
           "lambda:ListTags",
-          "lambda:GetFunction",
           "lambda:ListVersionsByFunction"
-
         ]
         Resource = [
           "*",
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "lambda:GetFunction",
+          "lambda:TagResource",
+          "lambda:UntagResource",
+          "lambda:UpdateFunctionCode",
+          "lambda:UpdateFunctionConfiguration",
+          "lambda:DeleteFunction",
+        ]
+        Resource = [
+          module.lambda_aws_cost_collector_func.arn,
+          module.lambda_cost_line_notify_func.arn,
+          module.lambda_get_next_processing_date_func.arn
         ]
       },
       {
