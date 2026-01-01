@@ -14,13 +14,13 @@ module "sfn_state_machine" {
         End  = true
         Branches = [
           {
-            StartAt = "AWSGetLastProcessedDate"
+            StartAt = "AWSGetNextProcessingDate"
             States = {
-              AWSGetLastProcessedDate = {
+              AWSGetNextProcessingDate = {
                 Type     = "Task"
                 Resource = module.lambda_get_next_processing_date_func.arn
                 Arguments = {
-                  "cost_source" = "aws"
+                  "cost_source" = "AWS"
                 }
                 Retry = [
                   {
@@ -34,11 +34,11 @@ module "sfn_state_machine" {
             }
           },
           # {
-          #   StartAt = "RakutenCardGetLastProcessedDate"
+          #   StartAt = "RakutenCardGetNextProcessingDate"
           #   States = {
-          #     RakutenCardGetLastProcessedDate = {
+          #     RakutenCardGetNextProcessingDate = {
           #       Type     = "Task"
-          #       Resource = module.lambda_get_last_processed_date_func.arn
+          #       Resource = module.lambda_get_next_processing_date_func.arn
           #       Arguments = {
           #         "cost_source" = "rakuten_card"
           #       }
