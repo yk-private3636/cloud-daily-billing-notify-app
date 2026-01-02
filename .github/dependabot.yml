@@ -23,6 +23,31 @@ updates:
           - "version-update:semver-major"
 
   - package-ecosystem: "gomod"
+    directory: "/event/src/cost_line_notify"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "github.com/aws/aws-sdk-go-v2"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-sdk-go-v2/config"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-sdk-go-v2/service/ssm"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-lambda-go"
+        update-types:
+          - "version-update:semver-major"
+
+  - package-ecosystem: "gomod"
     directory: "/event/src/aws_cost_collector"
     schedule:
       interval: "daily"
