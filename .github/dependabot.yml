@@ -2,7 +2,7 @@ version: 2
 updates:
 
   - package-ecosystem: "gomod"
-    directory: "/event/src/get_last_processed_date"
+    directory: "/event/src/get_next_processing_date"
     schedule:
       interval: "daily"
     ignore:
