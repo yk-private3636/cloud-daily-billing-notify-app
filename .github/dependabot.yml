@@ -2,7 +2,7 @@ version: 2
 updates:
 
   - package-ecosystem: "gomod"
-    directory: "/event/src/get_last_processed_date"
+    directory: "/event/src/get_next_processing_date"
     schedule:
       interval: "daily"
     ignore:
@@ -15,6 +15,31 @@ updates:
           - "version-update:semver-major"
 
       - dependency-name: "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-lambda-go"
+        update-types:
+          - "version-update:semver-major"
+
+  - package-ecosystem: "gomod"
+    directory: "/event/src/cost_line_notify"
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "github.com/aws/aws-sdk-go-v2"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-sdk-go-v2/config"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-sdk-go-v2/service/dynamodb"
+        update-types:
+          - "version-update:semver-major"
+
+      - dependency-name: "github.com/aws/aws-sdk-go-v2/service/ssm"
         update-types:
           - "version-update:semver-major"
 
@@ -46,7 +71,7 @@ updates:
   - package-ecosystem: "docker"
     directory: "/event"
     schedule:
-      interval: "weekly"
+      interval: "daily"
 
   - package-ecosystem: "docker"
     directory: "/infra"
