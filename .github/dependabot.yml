@@ -71,7 +71,7 @@ updates:
   - package-ecosystem: "docker"
     directory: "/event"
     schedule:
-      interval: "weekly"
+      interval: "daily"
 
   - package-ecosystem: "docker"
     directory: "/infra"
