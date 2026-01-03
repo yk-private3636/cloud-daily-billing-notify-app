@@ -40,6 +40,24 @@ module "sfn_state_machine" {
                     MaxAttempts     = 3
                   }
                 ]
+                Next = "AWSCheckNextProcessingDate"
+              },
+              AWSCheckNextProcessingDate = {
+                Type    = "Choice"
+                Default = "AWSCostCollector"
+                Choices = [
+                  {
+                    Condition = "{% $length($states.input.from) = 0 %}"
+                    Next      = "AWSInitializeNextProcessingDate"
+                  }
+                ]
+              },
+              AWSInitializeNextProcessingDate = {
+                Type = "Pass"
+                Output = {
+                  from = "{% $fromMillis($millis(), '[Y0001]-[M01]-[D01]', '+0900') %}"
+                  to   = "{% $fromMillis($millis(), '[Y0001]-[M01]-[D01]', '+0900') %}"
+                }
                 Next = "AWSCostCollector"
               },
               AWSCostCollector = {
