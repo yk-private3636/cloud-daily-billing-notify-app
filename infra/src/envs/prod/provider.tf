@@ -10,3 +10,14 @@ provider "aws" {
     }
   }
 }
+
+provider "google" {
+  project                     = var.project_name
+  region                      = "asia-northeast1"
+  zone                        = "asia-northeast1-a"
+  impersonate_service_account = var.google_service_account_email
+  default_labels = {
+    environment = var.env
+    name        = var.project_name
+  }
+}

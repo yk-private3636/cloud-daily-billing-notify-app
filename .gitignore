@@ -3,3 +3,4 @@
 *.tfvars
 /**/.terraform
 aws.config
+gcloud_credentials.json

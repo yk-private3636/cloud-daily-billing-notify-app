@@ -11,9 +11,11 @@ RUN apk update && \
 RUN ln -s /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 RUN ls -1 /usr/share/zoneinfo/ | grep -vx Asia | xargs -I {} rm -r /usr/share/zoneinfo/{}
 
-# RUN adduser -D terraform
-# RUN chown -R terraform:terraform /home/terraform/infra
+COPY ./gcloud_credentials.json /home/terraform/.config/gcloud/application_default_credentials.json
 
-# USER terraform
+RUN adduser -D terraform
+RUN chown -R terraform:terraform /home/terraform
+
+USER terraform
 
 ENTRYPOINT [ "tail", "-f", "/dev/null" ]
