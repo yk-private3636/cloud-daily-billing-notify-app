@@ -42,6 +42,11 @@ variable "executor_role_principal_name" {
   sensitive = true
 }
 
+variable "google_project_id" {
+  type      = string
+  sensitive = true
+}
+
 variable "google_service_account_email" {
   type      = string
   sensitive = true

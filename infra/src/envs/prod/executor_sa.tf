@@ -3,5 +3,5 @@ module "executor_sa" {
 
   account_id   = local.executor_sa_account_id
   display_name = local.executor_sa_accound_name
-  disabled = false
+  disabled     = false
 }

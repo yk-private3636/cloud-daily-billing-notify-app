@@ -4,7 +4,8 @@ locals {
   executor_role_name        = "${local.name}-executor-role"
   executor_role_policy_name = "${local.name}-executor-policy"
   executor_sa_account_id    = substr("${local.name}", 0, 30)
-  executor_sa_accound_name = "${local.name}-executor-sa"
+  executor_sa_accound_name  = "${local.name}-executor-sa"
+  executor_role_id          = "terraform_executor_sa_role"
 
   sfn_state_machine_name = "${local.name}-state-machine"
   sfn_role_name          = "${local.name}-sfn-role"
